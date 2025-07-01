@@ -2,7 +2,12 @@
 
 ## Visão Geral
 
-Este projeto automatiza a extração de dados de sites utilizando Firecrawl, armazena os dados em DuckDB e permite análises e geração de insights com agentes de IA. Ideal para portfólio de Data Engineering, Data Science e automação de dados.
+Este projeto automatiza a extração, armazenamento e análise de dados de sites, integrando:
+- **Firecrawl**: Webscraping automatizado.
+- **DuckDB**: Banco de dados analítico local.
+- **Agentes de IA (OpenAI + LangChain)**: Análise inteligente dos dados via linguagem natural.
+
+Ideal para portfólio de Data Engineering, Data Science e automação de dados.
 
 ## Estrutura de Diretórios
 
@@ -11,79 +16,68 @@ webscreaping-duckdb-firecrawl/
 │   README.md
 │   requirements.txt
 │
+├───database/
+│      database.duckdb
 └───src/
-    ├───app/
-    │   │   app.py
-    │   │   .env_example
-    │   │   .env
-    └───database/
+    └───app/
+        │   app.py
+        │   app_ai_agent_analyzer.py
+        │   .env_example
+        │   .env
 ```
 
-- O código principal está em `src/app/app.py`.
-- O banco de dados DuckDB é criado em `src/database/database.duckdb`.
-- As variáveis de ambiente são configuradas em `src/app/.env`.
+- O scraping e armazenamento estão em `src/app/app.py`.
+- A análise com IA está em `src/app/app_ai_agent_analyzer.py`.
+- O banco DuckDB é criado em `database/database.duckdb`.
+- Variáveis de ambiente em `src/app/.env`.
 
 ## Instalação
 
 1. **Clone o repositório:**
-
    ```bash
    git clone https://github.com/marcelopachione/webscreaping-duckdb-firecrawl.git
    cd webscreaping-duckdb-firecrawl
    ```
-
 2. **(Opcional) Crie e ative um ambiente virtual:**
-
    ```bash
    python -m venv .venv
    .venv\Scripts\activate  # Windows
    # ou
    source .venv/bin/activate  # Linux/Mac
    ```
-
 3. **Instale as dependências:**
-
    ```bash
    pip install -r requirements.txt
    ```
-
 4. **Configure as variáveis de ambiente:**
-
-   - Copie o arquivo `.env_example` para `.env` dentro de `src/app/`.
-   - Preencha as chaves necessárias, especialmente `FIRECRAWL_API_KEY` (obtenha em https://firecrawl.dev) e, se for usar IA, `OPENAI_API_KEY`.
-
-   Exemplo:
-   ```env
-   FIRECRAWL_API_KEY=sua_chave_aqui
-   OPENAI_API_KEY=sua_chave_openai
-   ```
+   - Copie `.env_example` para `.env` em `src/app/`.
+   - Preencha `FIRECRAWL_API_KEY` (https://firecrawl.dev/pricing) e `OPENAI_API_KEY`.
 
 ## Como Executar
 
+### 1. Scraping e Armazenamento
 No diretório `src/app/`, execute:
-
 ```bash
 python app.py
 ```
+- Faz scraping da URL definida.
+- Armazena os dados dos livros (título, preço) em `database/database.duckdb`.
 
-O script irá:
-- Carregar as variáveis de ambiente.
-- Validar a presença da chave da API Firecrawl.
-- Realizar scraping da URL definida (`https://books.toscrape.com/`).
-- Armazenar os dados coletados no banco DuckDB em `src/database/database.duckdb`.
-- (Opcional) Utilizar agentes de IA para análise dos dados.
+### 2. Análise com Agente de IA
+No mesmo diretório, execute:
+```bash
+python app_ai_agent_analyzer.py
+```
+- Realiza perguntas SQL inteligentes sobre os dados usando IA (OpenAI + LangChain).
+- Exemplos de perguntas já inclusas no código.
+- As respostas são salvas em `perguntas_respostas.txt`.
 
 ## Principais Dependências
-
-- `firecrawl-py`: Cliente Python para Firecrawl
-- `duckdb`: Banco de dados analítico
-- `beautifulsoup4`: Parsing de HTML
-- `python-dotenv`: Gerenciamento de variáveis de ambiente
-- `openai`: Integração com agentes de IA (opcional)
+- `firecrawl-py`, `duckdb`, `beautifulsoup4`, `python-dotenv`, `openai`, `langchain`, `langchain_community`, `langchain_openai`
 
 Veja todas as dependências em `requirements.txt`.
 
 ## Observações
-
-- O plano gratuito do Firecrawl possui limitações. Consulte [firecrawl.dev/pricing](https://firecrawl.dev/pricing).
-- O diretório `src/database/` será criado automaticamente se não existir.
+- O plano gratuito do Firecrawl possui limitações ([firecrawl.dev/pricing](https://firecrawl.dev/pricing)).
+- Não compartilhe suas chaves de API publicamente.
+- O diretório `database/` é criado automaticamente.

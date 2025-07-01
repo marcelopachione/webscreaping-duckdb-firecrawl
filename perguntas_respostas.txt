@@ -1,0 +1,24 @@
+========================================
+Pergunta: Qual o preço médio dos livros?
+Resposta: O preço médio dos livros é de aproximadamente 38,05.
+========================================
+========================================
+Pergunta: Liste os 3 livros mais caros, incluindo seus preços.
+Resposta: Os 3 livros mais caros são:
+
+1. "Our Band Could Be Your Life: Scenes from the American Indie Underground, 1981-1991" - R$ 57,25
+2. "Sapiens: A Brief History of Humankind" - R$ 54,23
+3. "Tipping the Velvet" - R$ 53,74
+========================================
+========================================
+Pergunta: Qual o livro mais barato?
+Resposta: O livro mais barato é "Starving Hearts (Triangular Trade Trilogy, #1)" com o preço de 13,99.
+========================================
+========================================
+Pergunta: Quantos livros custam mais de 50 libras?
+Resposta: Existem 8 livros que custam mais de 50 libras.
+========================================
+========================================
+Pergunta: Mostre o título e o preço do livro chamado 'Set Me Free'.
+Resposta: O título do livro é "Set Me Free" e o preço é 17,46.
+========================================
