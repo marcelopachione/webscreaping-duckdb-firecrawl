@@ -1,4 +1,4 @@
-# Webscraping Firecrawl + DuckDB + SQL Agent IA
+# Webscraping Firecrawl + DuckDB + IA
 
 ## Descrição
 
