@@ -1,0 +1,1 @@
+# webscreaping-duckdb-firecrawl
