@@ -1,25 +1,89 @@
-# Webscraping Firecrawl + DuckDB + IA
+# Webscraping Firecrawl + DuckDB + SQL Agent IA
 
-## Descrição
+## Visão Geral
 
-Este projeto realiza automação de extração de dados da web utilizando o Firecrawl, armazena as informações coletadas no DuckDB para possibilitar análises em tempo real e emprega agentes de IA para gerar insights a partir dos dados obtidos. A solução integra tecnologias modernas para facilitar o processamento, análise e interpretação inteligente de grandes volumes de dados extraídos da web.
+Este projeto automatiza a extração de dados de sites utilizando Firecrawl, armazena os dados em DuckDB e permite análises e geração de insights com agentes de IA. Ideal para portfólio de Data Engineering, Data Science e automação de dados.
 
-## Configuração da API Firecrawl
-
-Para executar este projeto, é necessário criar uma conta no serviço Firecrawl e obter uma chave de API. Este projeto utiliza o plano gratuito ("Free Plan"), que possui algumas limitações. Para mais detalhes sobre as restrições, consulte o site: [firecrawl.dev/pricing](https://firecrawl.dev/pricing).
-
-Após obter sua chave, adicione-a em um arquivo `.env` dentro da pasta `src/app` do projeto, seguindo o exemplo abaixo:
+## Estrutura de Diretórios
 
 ```
-FIRECRAWL_API_KEY=sua_chave_aqui
+webscreaping-duckdb-firecrawl/
+│   README.md
+│   requirements.txt
+│
+└───src/
+    ├───app/
+    │   │   app.py
+    │   │   .env_example
+    │   │   .env
+    └───database/
 ```
 
-Certifique-se de não compartilhar sua chave de API publicamente.
+- O código principal está em `src/app/app.py`.
+- O banco de dados DuckDB é criado em `src/database/database.duckdb`.
+- As variáveis de ambiente são configuradas em `src/app/.env`.
 
-## Instalação de Dependências
+## Instalação
 
-Antes de executar o projeto, instale todos os pacotes necessários listados no arquivo `requirements.txt`. Para isso, utilize o comando abaixo no terminal:
+1. **Clone o repositório:**
 
+   ```bash
+   git clone https://github.com/marcelopachione/webscreaping-duckdb-firecrawl.git
+   cd webscreaping-duckdb-firecrawl
+   ```
+
+2. **(Opcional) Crie e ative um ambiente virtual:**
+
+   ```bash
+   python -m venv .venv
+   .venv\Scripts\activate  # Windows
+   # ou
+   source .venv/bin/activate  # Linux/Mac
+   ```
+
+3. **Instale as dependências:**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Configure as variáveis de ambiente:**
+
+   - Copie o arquivo `.env_example` para `.env` dentro de `src/app/`.
+   - Preencha as chaves necessárias, especialmente `FIRECRAWL_API_KEY` (obtenha em https://firecrawl.dev) e, se for usar IA, `OPENAI_API_KEY`.
+
+   Exemplo:
+   ```env
+   FIRECRAWL_API_KEY=sua_chave_aqui
+   OPENAI_API_KEY=sua_chave_openai
+   ```
+
+## Como Executar
+
+No diretório `src/app/`, execute:
+
+```bash
+python app.py
 ```
-pip install -r requirements.txt
-```
+
+O script irá:
+- Carregar as variáveis de ambiente.
+- Validar a presença da chave da API Firecrawl.
+- Realizar scraping da URL definida (`https://books.toscrape.com/`).
+- Armazenar os dados coletados no banco DuckDB em `src/database/database.duckdb`.
+- (Opcional) Utilizar agentes de IA para análise dos dados.
+
+## Principais Dependências
+
+- `firecrawl-py`: Cliente Python para Firecrawl
+- `duckdb`: Banco de dados analítico
+- `beautifulsoup4`: Parsing de HTML
+- `python-dotenv`: Gerenciamento de variáveis de ambiente
+- `openai`: Integração com agentes de IA (opcional)
+
+Veja todas as dependências em `requirements.txt`.
+
+## Observações
+
+- O plano gratuito do Firecrawl possui limitações. Consulte [firecrawl.dev/pricing](https://firecrawl.dev/pricing).
+- O diretório `src/database/` será criado automaticamente se não existir.
